@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ProductController::class, 'index'])->name('products.index');
+Route::post('/cart', [ProductController::class, 'store'])->name('cart.store');
+
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::get('/set-order', [OrderController::class, 'setOrder'])->name('orders.set');
+Route::post('/checkout', [OrderController::class, 'checkout'])->name('checkout');
